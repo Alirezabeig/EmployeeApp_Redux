@@ -32,13 +32,43 @@ const initialState ={
     emName: "Kate",
     emSalary: 300000,
   }
+};
+const reducer = (state : initialState , action ) => {
+
+  let inititialSalary;
+  let incremnet;
+  let newSalary;
+  let employeeObj;
+
+if (action.id) {
+  inititialSalary = state[action.id].emSalary;
+  incremnet = (inititialSalary/100) * 20;
 }
+
+  switch (action.type) {
+    case "GOOD_PERFORMANCE":
+     newSalary = inititialSalary + incremnet
+     employeeObj = state[action.id];
+     employeeObj.empSalary = newSalary
+     return Object.assign({}, state)
+
+     case "BAD_PERFORMANCE":
+      newSalary = inititialSalary - incremnet
+      employeeObj = state[action.id];
+      employeeObj.empSalary = newSalary
+      return Object.assign({}, state)
+
+  }
+  return state
+}
+
+const store = createStore(reducer);
 
 class App extends Component {
   render (){
     return (
       <View style={styles.container}>
-        <Text>Hlloss App</Text>
+        <Text>Helloss App</Text>
         <StatusBar style="auto" />
       </View>
     );
