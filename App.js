@@ -67,10 +67,9 @@ const store = createStore(reducer);
 class App extends Component {
   render (){
     return (
-      <View style={styles.container}>
-        <Text>Helloss App</Text>
-        <StatusBar style="auto" />
-      </View>
+      <Provider store= {store}>
+        <EmployeeApp/>
+      </Provider>
     );
   }
 
