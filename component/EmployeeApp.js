@@ -2,16 +2,69 @@ import { StatusBar } from 'expo-status-bar';
 import React , {Component} from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import {connect} from 'react-redux';
+import {Card, Icon} from 'native-base';
 
 
 
 class EmployeeApp extends Component {
   render (){
     return (
-      <View style={styles.container}>
-        <Text>Hello 00App</Text>
-        <StatusBar style="auto" />
-      </View>
+      <View>
+      <FlatList
+
+      data = {(this.props.data)}
+
+      renderItem = { ({item}) => (
+          <Card style = { styles.container}>
+            <View>
+             <Text>{item.emId}</Text>
+            </View>
+
+            <View>
+              <Text>
+              Name: {item.emSalary}
+              </Text>
+
+                <Text>
+                Salary: {item.emSalary}
+                </Text>
+            </View>
+
+            <View>
+              <TouchableOpacity
+                onPress = { () => {
+                  this.props.badPerformance(item.emid)
+                }}
+                >
+                <Icon
+                ios = "ios-thumps-down"
+                android = "md-thumbs-down"
+                style = { styles.badPerformance}
+                />
+              </TouchableOpacity>
+
+
+              <TouchableOpacity
+                onPress = { () => {
+                  this.props.goodPerformance(item.emid)
+                }}
+                >
+                <Icon
+                ios = "ios-thumps-down"
+                android = "md-thumbs-down"
+                style = { styles.badPerformance}
+                />
+              </TouchableOpacity>
+            </View>
+
+
+          </Card>
+      )}
+      keyExtractor = {item => item.emId.toString()}
+      >
+
+      </FlatList>
+        </View>
     );
   }
 
@@ -19,8 +72,8 @@ class EmployeeApp extends Component {
 
 function mapStateToProps (state){
   return {
-    date : state
-  }
+    data : state
+  };
 }
 function mapDispatchToProps (dispatch) {
   return {
